@@ -23,6 +23,7 @@ class Form extends React.Component {
         <label htmlFor="name-input">
           <p>Nome da carta:</p>
           <input
+            name="cardName"
             data-testid="name-input"
             type="text"
             onChange={ onInputChange }
@@ -32,6 +33,7 @@ class Form extends React.Component {
         <label htmlFor="description-textarea">
           <p>Descrição da carta:</p>
           <textarea
+            name="cardDescription"
             data-testid="description-input"
             value={ cardDescription }
             onChange={ onInputChange }
@@ -40,6 +42,7 @@ class Form extends React.Component {
         <label htmlFor="attr1-input">
           <p>Atributo 01:</p>
           <input
+            name="cardAttr1"
             data-testid="attr1-input"
             type="number"
             value={ cardAttr1 }
@@ -49,6 +52,7 @@ class Form extends React.Component {
         <label htmlFor="attr2-input">
           <p>Atributo 02:</p>
           <input
+            name="cardAttr2"
             data-testid="attr2-input"
             type="number"
             value={ cardAttr2 }
@@ -58,6 +62,7 @@ class Form extends React.Component {
         <label htmlFor="attr3-input">
           <p>Atributo 03:</p>
           <input
+            name="cardAttr3"
             data-testid="attr3-input"
             type="number"
             value={ cardAttr3 }
@@ -67,6 +72,7 @@ class Form extends React.Component {
         <label htmlFor="image-input">
           <p>Imagem da carta:</p>
           <input
+            name="cardImage"
             data-testid="image-input"
             type="text"
             value={ cardImage }
@@ -76,6 +82,7 @@ class Form extends React.Component {
         <label htmlFor="rare-input">
           <p>Raridade:</p>
           <select
+            name="cardRare"
             data-testid="rare-input"
             value={ cardRare }
             onChange={ onInputChange }
@@ -88,6 +95,7 @@ class Form extends React.Component {
         <br />
         <label htmlFor="trunfo-input">
           <input
+            name="cardTrunfo"
             data-testid="trunfo-input"
             type="checkbox"
             checked={ cardTrunfo }
