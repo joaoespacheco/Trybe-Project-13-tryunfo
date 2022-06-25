@@ -21,6 +21,8 @@ class App extends React.Component {
     this.handleChanger = this.handleChanger.bind(this);
     this.checkState = this.checkState.bind(this);
     this.saveCardOnDeck = this.saveCardOnDeck.bind(this);
+    this.deleteCardOnDeck = this.deleteCardOnDeck.bind(this);
+    this.checkTheTrunfo = this.checkTheTrunfo.bind(this);
   }
 
   handleChanger({ target }) {
@@ -54,15 +56,16 @@ class App extends React.Component {
       cardAttr1,
       cardAttr2,
       cardAttr3,
+      cardTrunfo,
     };
     const stateReset = [
       { target: { name: 'cardName', value: '' } },
       { target: { name: 'cardDescription', value: '' } },
       { target: { name: 'cardImage', value: '' } },
       { target: { name: 'cardRare', value: 'normal' } },
-      { target: { name: 'cardAttr1', value: 0 } },
-      { target: { name: 'cardAttr2', value: 0 } },
-      { target: { name: 'cardAttr3', value: 0 } },
+      { target: { name: 'cardAttr1', value: '0' } },
+      { target: { name: 'cardAttr2', value: '0' } },
+      { target: { name: 'cardAttr3', value: '0' } },
       { target: { name: 'cardTrunfo', value: false } },
     ];
     this.setState(
@@ -104,12 +107,30 @@ class App extends React.Component {
         0,
       );
       const valuesLimits = attrElements.every(
-        (atributo) => atributo >= valueMin && atributo <= valueMax,
+        (atributo) => Number(atributo) >= valueMin && Number(atributo) <= valueMax,
       );
       const valuesSum = sumOfAttributes <= maxValueOfSum;
       results = !(valuesLimits === true && valuesSum === true);
     }
     this.setState({ isSaveButtonDisabled: results });
+  }
+
+  deleteCardOnDeck({ target }) {
+    const { deckOfcards } = this.state;
+    const deck = deckOfcards;
+    const newDeck = deck.filter(({ cardName }) => cardName !== target.id);
+    this.setState({ deckOfcards: newDeck }, () => this.checkTheTrunfo());
+  }
+
+  checkTheTrunfo() {
+    const { deckOfcards } = this.state;
+    if (deckOfcards.length > 0) {
+      const deck = deckOfcards;
+      const status = deck.some(({ cardTrunfo }) => cardTrunfo === true);
+      this.setState({ hasTrunfo: status });
+    } else {
+      this.setState({ hasTrunfo: false });
+    }
   }
 
   render() {
@@ -155,19 +176,30 @@ class App extends React.Component {
           cardTrunfo={ cardTrunfo }
         />
         <section>
-          {deckOfcards.length > 0 ? <h2>Todas as cartas</h2> : ''}
+          { deckOfcards.length > 0 ? <h2>Todas as cartas</h2> : '' }
           { deckOfcards.map((carta) => (
-            <Card
-              key={ carta.cardName }
-              cardName={ carta.cardName }
-              cardDescription={ carta.cardDescription }
-              cardAttr1={ carta.cardAttr1 }
-              cardAttr2={ carta.cardAttr2 }
-              cardAttr3={ carta.cardAttr3 }
-              cardImage={ carta.cardImage }
-              cardRare={ carta.cardRare }
-              cardTrunfo={ carta.cardTrunfo }
-            />
+            <div key={ carta.cardName }>
+              <Card
+                cardName={ carta.cardName }
+                cardDescription={ carta.cardDescription }
+                cardAttr1={ carta.cardAttr1 }
+                cardAttr2={ carta.cardAttr2 }
+                cardAttr3={ carta.cardAttr3 }
+                cardImage={ carta.cardImage }
+                cardRare={ carta.cardRare }
+                cardTrunfo={ carta.cardTrunfo }
+              />
+              <button
+                data-testid="delete-button"
+                id={ carta.cardName }
+                onClick={ (event) => {
+                  this.deleteCardOnDeck(event);
+                } }
+                type="button"
+              >
+                Excluir
+              </button>
+            </div>
           ))}
         </section>
       </div>
