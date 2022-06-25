@@ -15,9 +15,10 @@ class App extends React.Component {
       cardRare: '',
       cardTrunfo: false,
       hasTrunfo: false,
-      isSaveButtonDisabled: false,
+      isSaveButtonDisabled: true,
     };
     this.handleChanger = this.handleChanger.bind(this);
+    this.checkState = this.checkState.bind(this);
   }
 
   handleChanger({ target }) {
@@ -29,7 +30,53 @@ class App extends React.Component {
     });
   }
 
+  checkState() {
+    const {
+      cardName,
+      cardDescription,
+      cardImage,
+      cardRare,
+      cardAttr1,
+      cardAttr2,
+      cardAttr3,
+      isSaveButtonDisabled,
+    } = this.state;
+    const valueMax = 90;
+    const valueMin = 0;
+    const maxValueOfSum = 210;
+    const stateElements = [
+      cardName,
+      cardDescription,
+      cardImage,
+      cardRare,
+      cardAttr1,
+      cardAttr2,
+      cardAttr3,
+    ];
+    let results = false;
+    if (stateElements.every((element) => element !== '')) {
+      const attrElements = [cardAttr1, cardAttr2, cardAttr3];
+      const sumOfAttributes = attrElements.reduce(((acc, crr) => acc + Number(crr)), 0);
+      const valuesLimits = attrElements.every(
+        (atributo) => atributo >= valueMin && atributo <= valueMax,
+      );
+      const valuesSum = (sumOfAttributes <= maxValueOfSum);
+      results = (valuesLimits === true && valuesSum === true);
+    }
+    if (isSaveButtonDisabled === true && results === true) {
+      this.handleChanger({
+        target: { name: 'isSaveButtonDisabled', value: false },
+      });
+    }
+    if (isSaveButtonDisabled === false && results === false) {
+      this.handleChanger({
+        target: { name: 'isSaveButtonDisabled', value: true },
+      });
+    }
+  }
+
   render() {
+    this.checkState();
     const {
       cardName,
       cardDescription,
@@ -42,6 +89,7 @@ class App extends React.Component {
       hasTrunfo,
       isSaveButtonDisabled,
     } = this.state;
+
     return (
       <div>
         <h1>Tryunfo</h1>
