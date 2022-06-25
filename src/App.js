@@ -16,18 +16,52 @@ class App extends React.Component {
       cardTrunfo: false,
       hasTrunfo: false,
       isSaveButtonDisabled: true,
+      deckOfcards: [],
     };
     this.handleChanger = this.handleChanger.bind(this);
     this.checkState = this.checkState.bind(this);
+    this.saveCardOnDeck = this.saveCardOnDeck.bind(this);
   }
 
   handleChanger({ target }) {
     const { name } = target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
-
     this.setState({
       [name]: value,
-    });
+    }, () => this.checkState());
+  }
+
+  saveCardOnDeck() {
+    const {
+      cardName,
+      cardDescription,
+      cardImage,
+      cardRare,
+      cardAttr1,
+      cardAttr2,
+      cardAttr3,
+    } = this.state;
+    const newCart = {
+      cardName,
+      cardDescription,
+      cardImage,
+      cardRare,
+      cardAttr1,
+      cardAttr2,
+      cardAttr3,
+    };
+    const stateReset = [
+      { target: { name: 'cardName', value: '' } },
+      { target: { name: 'cardDescription', value: '' } },
+      { target: { name: 'cardImage', value: '' } },
+      { target: { name: 'cardRare', value: 'normal' } },
+      { target: { name: 'cardAttr1', value: 0 } },
+      { target: { name: 'cardAttr2', value: 0 } },
+      { target: { name: 'cardAttr3', value: 0 } },
+    ];
+    this.setState((previousState) => ({
+      deckOfcards: [...previousState.deckOfcards, newCart],
+    }), () => stateReset.forEach((target) => this.handleChanger(target)));
   }
 
   checkState() {
@@ -39,7 +73,6 @@ class App extends React.Component {
       cardAttr1,
       cardAttr2,
       cardAttr3,
-      isSaveButtonDisabled,
     } = this.state;
     const valueMax = 90;
     const valueMin = 0;
@@ -53,7 +86,7 @@ class App extends React.Component {
       cardAttr2,
       cardAttr3,
     ];
-    let results = false;
+    let results = true;
     if (stateElements.every((element) => element !== '')) {
       const attrElements = [cardAttr1, cardAttr2, cardAttr3];
       const sumOfAttributes = attrElements.reduce(((acc, crr) => acc + Number(crr)), 0);
@@ -61,22 +94,12 @@ class App extends React.Component {
         (atributo) => atributo >= valueMin && atributo <= valueMax,
       );
       const valuesSum = (sumOfAttributes <= maxValueOfSum);
-      results = (valuesLimits === true && valuesSum === true);
+      results = !(valuesLimits === true && valuesSum === true);
     }
-    if (isSaveButtonDisabled === true && results === true) {
-      this.handleChanger({
-        target: { name: 'isSaveButtonDisabled', value: false },
-      });
-    }
-    if (isSaveButtonDisabled === false && results === false) {
-      this.handleChanger({
-        target: { name: 'isSaveButtonDisabled', value: true },
-      });
-    }
+    this.setState({ isSaveButtonDisabled: results });
   }
 
   render() {
-    this.checkState();
     const {
       cardName,
       cardDescription,
@@ -105,7 +128,7 @@ class App extends React.Component {
           hasTrunfo={ hasTrunfo }
           isSaveButtonDisabled={ isSaveButtonDisabled }
           onInputChange={ this.handleChanger }
-          onSaveButtonClick={ () => { } }
+          onSaveButtonClick={ this.saveCardOnDeck }
         />
         <Card
           cardName={ cardName }
