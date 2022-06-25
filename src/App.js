@@ -26,9 +26,12 @@ class App extends React.Component {
   handleChanger({ target }) {
     const { name } = target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
-    this.setState({
-      [name]: value,
-    }, () => this.checkState());
+    this.setState(
+      {
+        [name]: value,
+      },
+      () => this.checkState(),
+    );
   }
 
   saveCardOnDeck() {
@@ -62,10 +65,13 @@ class App extends React.Component {
       { target: { name: 'cardAttr3', value: 0 } },
       { target: { name: 'cardTrunfo', value: false } },
     ];
-    this.setState((previousState) => ({
-      deckOfcards: [...previousState.deckOfcards, newCart],
-    }), () => stateReset.forEach((target) => this.handleChanger(target)));
-    if (hasTrunfo === false) this.setState(({ hasTrunfo: cardTrunfo }));
+    this.setState(
+      (previousState) => ({
+        deckOfcards: [...previousState.deckOfcards, newCart],
+      }),
+      () => stateReset.forEach((target) => this.handleChanger(target)),
+    );
+    if (hasTrunfo === false) this.setState({ hasTrunfo: cardTrunfo });
   }
 
   checkState() {
@@ -93,11 +99,14 @@ class App extends React.Component {
     let results = true;
     if (stateElements.every((element) => element !== '')) {
       const attrElements = [cardAttr1, cardAttr2, cardAttr3];
-      const sumOfAttributes = attrElements.reduce(((acc, crr) => acc + Number(crr)), 0);
+      const sumOfAttributes = attrElements.reduce(
+        (acc, crr) => acc + Number(crr),
+        0,
+      );
       const valuesLimits = attrElements.every(
         (atributo) => atributo >= valueMin && atributo <= valueMax,
       );
-      const valuesSum = (sumOfAttributes <= maxValueOfSum);
+      const valuesSum = sumOfAttributes <= maxValueOfSum;
       results = !(valuesLimits === true && valuesSum === true);
     }
     this.setState({ isSaveButtonDisabled: results });
@@ -115,6 +124,7 @@ class App extends React.Component {
       cardTrunfo,
       hasTrunfo,
       isSaveButtonDisabled,
+      deckOfcards,
     } = this.state;
 
     return (
@@ -144,6 +154,22 @@ class App extends React.Component {
           cardRare={ cardRare }
           cardTrunfo={ cardTrunfo }
         />
+        <section>
+          {deckOfcards.length > 0 ? <h2>Todas as cartas</h2> : ''}
+          { deckOfcards.map((carta) => (
+            <Card
+              key={ carta.cardName }
+              cardName={ carta.cardName }
+              cardDescription={ carta.cardDescription }
+              cardAttr1={ carta.cardAttr1 }
+              cardAttr2={ carta.cardAttr2 }
+              cardAttr3={ carta.cardAttr3 }
+              cardImage={ carta.cardImage }
+              cardRare={ carta.cardRare }
+              cardTrunfo={ carta.cardTrunfo }
+            />
+          ))}
+        </section>
       </div>
     );
   }
