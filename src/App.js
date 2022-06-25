@@ -40,6 +40,8 @@ class App extends React.Component {
       cardAttr1,
       cardAttr2,
       cardAttr3,
+      cardTrunfo,
+      hasTrunfo,
     } = this.state;
     const newCart = {
       cardName,
@@ -58,10 +60,12 @@ class App extends React.Component {
       { target: { name: 'cardAttr1', value: 0 } },
       { target: { name: 'cardAttr2', value: 0 } },
       { target: { name: 'cardAttr3', value: 0 } },
+      { target: { name: 'cardTrunfo', value: false } },
     ];
     this.setState((previousState) => ({
       deckOfcards: [...previousState.deckOfcards, newCart],
     }), () => stateReset.forEach((target) => this.handleChanger(target)));
+    if (hasTrunfo === false) this.setState(({ hasTrunfo: cardTrunfo }));
   }
 
   checkState() {
