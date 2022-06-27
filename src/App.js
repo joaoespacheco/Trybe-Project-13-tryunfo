@@ -17,7 +17,7 @@ class App extends React.Component {
       hasTrunfo: false,
       isSaveButtonDisabled: true,
       deckOfcards: [],
-      filterText: '',
+      filterText: ['cardName', ''],
     };
     this.handleChanger = this.handleChanger.bind(this);
     this.checkState = this.checkState.bind(this);
@@ -135,9 +135,17 @@ class App extends React.Component {
     }
   }
 
-  cardConstructor() {
-    const { deckOfcards, filterText } = this.state;
-    const newObjetc = deckOfcards.filter(({ cardName }) => cardName.includes(filterText));
+  cardConstructor(array) {
+    const { deckOfcards } = this.state;
+    const newArray = array;
+    const [elemento, valor] = newArray;
+    const lengthCardRaro = 4;
+    let funcao = (chave) => chave[elemento].includes(valor);
+    if (array[1] === 'todas') funcao = (chave) => chave[elemento].includes('');
+    if (array[1] === 'raro') {
+      funcao = (chave) => chave[elemento].length === lengthCardRaro;
+    }
+    const newObjetc = deckOfcards.filter((chave) => funcao(chave));
     const retorno = newObjetc.map((carta) => (
       <div key={ carta.cardName }>
         <Card
@@ -167,44 +175,19 @@ class App extends React.Component {
 
   render() {
     const {
-      cardName,
-      cardDescription,
-      cardAttr1,
-      cardAttr2,
-      cardAttr3,
-      cardImage,
-      cardRare,
-      cardTrunfo,
-      hasTrunfo,
-      isSaveButtonDisabled,
+      filterText,
     } = this.state;
 
     return (
       <div>
         <h1>Tryunfo</h1>
         <Form
-          cardName={ cardName }
-          cardDescription={ cardDescription }
-          cardAttr1={ cardAttr1 }
-          cardAttr2={ cardAttr2 }
-          cardAttr3={ cardAttr3 }
-          cardImage={ cardImage }
-          cardRare={ cardRare }
-          cardTrunfo={ cardTrunfo }
-          hasTrunfo={ hasTrunfo }
-          isSaveButtonDisabled={ isSaveButtonDisabled }
+          { ...this.state }
           onInputChange={ this.handleChanger }
           onSaveButtonClick={ this.saveCardOnDeck }
         />
         <Card
-          cardName={ cardName }
-          cardDescription={ cardDescription }
-          cardAttr1={ cardAttr1 }
-          cardAttr2={ cardAttr2 }
-          cardAttr3={ cardAttr3 }
-          cardImage={ cardImage }
-          cardRare={ cardRare }
-          cardTrunfo={ cardTrunfo }
+          { ...this.state }
         />
         <section>
           <h2>Todas as cartas</h2>
@@ -213,10 +196,29 @@ class App extends React.Component {
               name="filterText"
               type="text"
               data-testid="name-filter"
-              onChange={ this.handleChanger }
+              onChange={
+                (event) => (
+                  this.setState({ filterText: ['cardName', event.target.value] }))
+              }
             />
           </label>
-          {this.cardConstructor()}
+          <label htmlFor="name-filter">
+            <select
+              name="filterRarity"
+              type="text"
+              data-testid="rare-filter"
+              onChange={
+                (event) => (
+                  this.setState({ filterText: ['cardRare', event.target.value] }))
+              }
+            >
+              <option>todas</option>
+              <option>normal</option>
+              <option>raro</option>
+              <option>muito raro</option>
+            </select>
+          </label>
+          {this.cardConstructor(filterText)}
         </section>
       </div>
     );
