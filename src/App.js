@@ -18,6 +18,7 @@ class App extends React.Component {
       isSaveButtonDisabled: true,
       deckOfcards: [],
       filterText: ['cardName', ''],
+      filterDisable: false,
     };
     this.handleChanger = this.handleChanger.bind(this);
     this.checkState = this.checkState.bind(this);
@@ -145,6 +146,7 @@ class App extends React.Component {
     if (array[1] === 'raro') {
       funcao = (chave) => chave[elemento].length === lengthCardRaro;
     }
+    if (array[0] === 'cardTrunfo') funcao = (chave) => chave[elemento] === valor;
     const newObjetc = deckOfcards.filter((chave) => funcao(chave));
     const retorno = newObjetc.map((carta) => (
       <div key={ carta.cardName }>
@@ -176,6 +178,7 @@ class App extends React.Component {
   render() {
     const {
       filterText,
+      filterDisable,
     } = this.state;
 
     return (
@@ -200,6 +203,7 @@ class App extends React.Component {
                 (event) => (
                   this.setState({ filterText: ['cardName', event.target.value] }))
               }
+              disabled={ filterDisable }
             />
           </label>
           <label htmlFor="name-filter">
@@ -211,12 +215,27 @@ class App extends React.Component {
                 (event) => (
                   this.setState({ filterText: ['cardRare', event.target.value] }))
               }
+              disabled={ filterDisable }
             >
               <option>todas</option>
               <option>normal</option>
               <option>raro</option>
               <option>muito raro</option>
             </select>
+          </label>
+          <label htmlFor="trunfo-input">
+            Super trunfo
+            <input
+              data-testid="trunfo-filter"
+              type="checkbox"
+              onChange={
+                (event) => (
+                  this.setState({
+                    filterText: ['cardTrunfo', event.target.checked],
+                    filterDisable: event.target.checked,
+                  }))
+              }
+            />
           </label>
           {this.cardConstructor(filterText)}
         </section>
