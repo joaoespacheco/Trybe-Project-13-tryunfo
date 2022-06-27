@@ -17,12 +17,14 @@ class App extends React.Component {
       hasTrunfo: false,
       isSaveButtonDisabled: true,
       deckOfcards: [],
+      filterText: '',
     };
     this.handleChanger = this.handleChanger.bind(this);
     this.checkState = this.checkState.bind(this);
     this.saveCardOnDeck = this.saveCardOnDeck.bind(this);
     this.deleteCardOnDeck = this.deleteCardOnDeck.bind(this);
     this.checkTheTrunfo = this.checkTheTrunfo.bind(this);
+    this.cardConstructor = this.cardConstructor.bind(this);
   }
 
   handleChanger({ target }) {
@@ -133,6 +135,36 @@ class App extends React.Component {
     }
   }
 
+  cardConstructor() {
+    const { deckOfcards, filterText } = this.state;
+    const newObjetc = deckOfcards.filter(({ cardName }) => cardName.includes(filterText));
+    const retorno = newObjetc.map((carta) => (
+      <div key={ carta.cardName }>
+        <Card
+          cardName={ carta.cardName }
+          cardDescription={ carta.cardDescription }
+          cardAttr1={ carta.cardAttr1 }
+          cardAttr2={ carta.cardAttr2 }
+          cardAttr3={ carta.cardAttr3 }
+          cardImage={ carta.cardImage }
+          cardRare={ carta.cardRare }
+          cardTrunfo={ carta.cardTrunfo }
+        />
+        <button
+          data-testid="delete-button"
+          id={ carta.cardName }
+          onClick={ (event) => {
+            this.deleteCardOnDeck(event);
+          } }
+          type="button"
+        >
+          Excluir
+        </button>
+      </div>
+    ));
+    return retorno;
+  }
+
   render() {
     const {
       cardName,
@@ -145,7 +177,6 @@ class App extends React.Component {
       cardTrunfo,
       hasTrunfo,
       isSaveButtonDisabled,
-      deckOfcards,
     } = this.state;
 
     return (
@@ -176,31 +207,16 @@ class App extends React.Component {
           cardTrunfo={ cardTrunfo }
         />
         <section>
-          { deckOfcards.length > 0 ? <h2>Todas as cartas</h2> : '' }
-          { deckOfcards.map((carta) => (
-            <div key={ carta.cardName }>
-              <Card
-                cardName={ carta.cardName }
-                cardDescription={ carta.cardDescription }
-                cardAttr1={ carta.cardAttr1 }
-                cardAttr2={ carta.cardAttr2 }
-                cardAttr3={ carta.cardAttr3 }
-                cardImage={ carta.cardImage }
-                cardRare={ carta.cardRare }
-                cardTrunfo={ carta.cardTrunfo }
-              />
-              <button
-                data-testid="delete-button"
-                id={ carta.cardName }
-                onClick={ (event) => {
-                  this.deleteCardOnDeck(event);
-                } }
-                type="button"
-              >
-                Excluir
-              </button>
-            </div>
-          ))}
+          <h2>Todas as cartas</h2>
+          <label htmlFor="name-filter">
+            <input
+              name="filterText"
+              type="text"
+              data-testid="name-filter"
+              onChange={ this.handleChanger }
+            />
+          </label>
+          {this.cardConstructor()}
         </section>
       </div>
     );
