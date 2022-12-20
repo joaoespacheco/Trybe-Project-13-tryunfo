@@ -67,4 +67,4 @@ Aprovado com 100% de desempenho em todos os requisitos
 * React
 
 ## 📝 Desenvolvido por:
-* [João Emanuel Soares Pacheco] (https://github.com/joaoespacheco)
+* [João Emanuel Soares Pacheco](https://github.com/joaoespacheco)
