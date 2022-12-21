@@ -20,7 +20,7 @@ Tarefas em andamento:
 > * Testes automatizados
 > * Funcionalidade de jogar
 
-
+</br>
 <details>
 <summary><strong>Desempenho</strong></summary>
 Aprovado com 100% de desempenho em todos os requisitos
@@ -52,6 +52,7 @@ Aprovado com 100% de desempenho em todos os requisitos
 <summary><strong>Visualizar projeto</strong></summary>
 :construction: Área em construção ! :construction:
 </details>
+</br>
 
 ## 🤹🏽 Habilidades Desenvolvidas:
 * Desenvolver uma aplicação react
@@ -59,12 +60,14 @@ Aprovado com 100% de desempenho em todos os requisitos
 * Criar formulários e capturar eventos
 * Criar componentes controlados
 * Transmitir informações de componentes filhos para componentes pais via callbacks
+</br>
 
 ## 🧰 Ferramentas:
 * HTML
 * CSS
 * JavaScript
 * React
+</br>
 
 ## 📝 Desenvolvido por:
 * [João Emanuel Soares Pacheco](https://github.com/joaoespacheco)
