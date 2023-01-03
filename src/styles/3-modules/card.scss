@@ -1,7 +1,115 @@
+@import '../1-base/variables';
+
 .card-container {
+  background-color: $second-color;
+  border-radius: 1rem;
+  border: 0.3rem solid $dark-font;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
+  padding: 1rem 1rem 0.5rem 1rem;
+  row-gap: 1rem;
+  width: 26rem;
+  height: 38rem;
+  transition: 1s;
+
+  &-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: $light-font;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    border: 0.15rem solid $dark-font;
+    height: 3rem;
+
+    h2 {
+      font-size: 2rem;
+      font-weight: bold;
+      padding-left: 2rem;
+    }
+
+    h3 {
+      text-align: center;
+      width: 8rem;
+      color: white;
+      padding: 0.5rem;
+      font-size: 1.3rem;
+      background-color: $dark-font;
+      border-radius: 5rem;
+    }
+  }
+
+  &-picture {
+    background-color: $dark-font;
+    border: 0.15rem solid $dark-font;
+    border-radius: 0.5rem;
+    height: 15rem;
+    overflow: hidden;
+    text-align: center;
+
+    img {
+      height: 100%;
+    }
+
+    p {
+      background-color: $dark-font;
+      border: 0.15rem solid $light-font;
+      padding: 1rem;
+      font-size: 1.5rem;
+      color: $light-font;
+      position: absolute;
+      border-radius: 50%;
+      word-wrap: normal;
+      margin: 0.5rem 0 0 0.5rem;
+    }
+  }
+
+  &-description {
+    background-color: $light-font;
+    border: 0.15rem solid $dark-font;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    height: 5rem;
+
+    p {
+      font-size: 1.25rem;
+    }
+  }
+
+  &-attributes {
+    display: flex;
+    flex-direction: column;
+    row-gap: 0.25rem;
+    height: 10rem;
+
+    &-item {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      background-color: $primary-color;
+
+      .attr-name {
+        width: 100%;
+        padding: 0.25rem 1rem 0.25rem 0.75rem;
+
+        h2 {
+          font-size: 1.5rem;
+        }
+      }
+
+      .attr-value {
+        display: flex;
+        justify-content: center;
+        width: 70%;
+        background-color: $dark-font;
+        padding: 0.25rem 0.25rem 0.25rem;
+        clip-path: polygon(20% 0, 10% 100%, 100% 100%, 100% 100%, 100% 0);
+       
+        h3 {
+          color: $light-font;
+          font-size: 2rem;
+        }
+      }
+    }
+  }
 }

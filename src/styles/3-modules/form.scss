@@ -3,12 +3,14 @@
 .form-container {
   background-color: $second-color;
   border-radius: 1rem;
-  border: 0.3rem solid $dark-font;
+  border: 0.3rem solid $second-color;
   display: flex;
   flex-direction: column;
-  padding: 1rem;
+  padding: 1rem 1rem 0.5rem 1rem;
   row-gap: 1rem;
-  width: 65%;
+  width: 26rem;
+  height: 38rem;
+  transition: 1s;
 
   label {
     padding: 0.1rem;
@@ -99,13 +101,16 @@
     height: 3rem;
     font-size: 1.5rem;
     border-radius: 0.5rem;
-    border: 0.2rem solid $dark-font;
     transition: 1s;
   }
 
   button:disabled {
     background-color: rgba(0,0,0, 0.6);
     color: rgba(0,0,0, 0.6);
+  }
+
+  &:hover {
+    border: 0.3rem solid $dark-font;
   }
 
 }

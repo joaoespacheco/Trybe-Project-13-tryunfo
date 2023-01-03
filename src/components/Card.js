@@ -15,16 +15,54 @@ class Card extends React.Component {
     } = this.props;
     return (
       <div className="card-container">
-        <h2 data-testid="name-card">{ cardName }</h2>
-        <img data-testid="image-card" src={ cardImage } alt={ cardName } />
-        <p data-testid="description-card">{ cardDescription }</p>
-        <ul>
-          <li data-testid="attr1-card">{cardAttr1}</li>
-          <li data-testid="attr2-card">{cardAttr2}</li>
-          <li data-testid="attr3-card">{cardAttr3}</li>
-        </ul>
-        <h3 data-testid="rare-card">{cardRare}</h3>
-        { cardTrunfo === true ? <h3 data-testid="trunfo-card">Super Trunfo</h3> : '' }
+        <div className="card-container-header">
+          <h2 data-testid="name-card">{ cardName }</h2>
+          <h3 data-testid="rare-card">{cardRare}</h3>
+        </div>
+        <div className="card-container-picture">
+          {
+            cardTrunfo === true ? (
+              <p data-testid="trunfo-card">
+                Super
+                {' '}
+                <br />
+                {' '}
+                Trunfo
+              </p>
+            ) : (
+              '')
+          }
+          <img data-testid="image-card" src={ cardImage } alt={ cardName } />
+        </div>
+        <div className="card-container-description">
+          <p data-testid="description-card">{ cardDescription }</p>
+        </div>
+        <div className="card-container-attributes">
+          <div data-testid="attr1-card" className="card-container-attributes-item">
+            <div className="attr-name">
+              <h2>Atributo 01:</h2>
+            </div>
+            <div className="attr-value">
+              <h3>{cardAttr1}</h3>
+            </div>
+          </div>
+          <div data-testid="attr2-card" className="card-container-attributes-item">
+            <div className="attr-name">
+              <h2>Atributo 02:</h2>
+            </div>
+            <div className="attr-value">
+              <h3>{cardAttr2}</h3>
+            </div>
+          </div>
+          <div data-testid="attr3-card" className="card-container-attributes-item">
+            <div className="attr-name">
+              <h2>Atributo 03:</h2>
+            </div>
+            <div className="attr-value">
+              <h3>{cardAttr3}</h3>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
