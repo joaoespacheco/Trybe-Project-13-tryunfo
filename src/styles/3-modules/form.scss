@@ -58,10 +58,11 @@
   &-rarity{
     display: flex;
     justify-content: center;
+    align-items: center;
     column-gap: 2rem;
 
     select {
-      width: 30%;
+      width: 40%;
       font-size: 1.5rem;
       border: .15rem solid black;
       border-radius: 0.5rem;
@@ -102,6 +103,7 @@
     font-size: 1.5rem;
     border-radius: 0.5rem;
     transition: 1s;
+    border: none;
   }
 
   button:disabled {

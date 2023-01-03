@@ -175,52 +175,57 @@ class App extends React.Component {
               />
             </div>
           </section>
-          <section>
-            <h2>Todas as cartas</h2>
-            <label htmlFor="name-filter">
-              <input
-                name="filterText"
-                type="text"
-                data-testid="name-filter"
-                onChange={
-                  (event) => (
-                    this.setState({ filterText: ['cardName', event.target.value] }))
-                }
-                disabled={ filterDisable }
-              />
-            </label>
-            <label htmlFor="name-filter">
-              <select
-                name="filterRarity"
-                type="text"
-                data-testid="rare-filter"
-                onChange={
-                  (event) => (
-                    this.setState({ filterText: ['cardRare', event.target.value] }))
-                }
-                disabled={ filterDisable }
-              >
-                <option>todas</option>
-                <option>normal</option>
-                <option>raro</option>
-                <option>muito raro</option>
-              </select>
-            </label>
-            <label htmlFor="trunfo-input">
-              Super trunfo
-              <input
-                data-testid="trunfo-filter"
-                type="checkbox"
-                onChange={
-                  (event) => (
-                    this.setState({
-                      filterText: ['cardTrunfo', event.target.checked],
-                      filterDisable: event.target.checked,
-                    }))
-                }
-              />
-            </label>
-            {this.cardConstructor(filterText)}
+          <h1>Minhas Cartas</h1>
+          <section className="deck-section">
+            <div className="deck-section-filter">
+              <label htmlFor="name-filter">
+                <input
+                  name="filterText"
+                  type="text"
+                  data-testid="name-filter"
+                  placeholder="Digite o nome da carta"
+                  onChange={
+                    (event) => (
+                      this.setState({ filterText: ['cardName', event.target.value] }))
+                  }
+                  disabled={ filterDisable }
+                />
+              </label>
+              <label htmlFor="name-filter">
+                <select
+                  name="filterRarity"
+                  type="text"
+                  data-testid="rare-filter"
+                  onChange={
+                    (event) => (
+                      this.setState({ filterText: ['cardRare', event.target.value] }))
+                  }
+                  disabled={ filterDisable }
+                >
+                  <option>todas</option>
+                  <option>normal</option>
+                  <option>raro</option>
+                  <option>muito raro</option>
+                </select>
+              </label>
+              <label htmlFor="trunfo-input" className="deck-section-filter-trunfo">
+                <p>Super trunfo</p>
+                <input
+                  data-testid="trunfo-filter"
+                  type="checkbox"
+                  onChange={
+                    (event) => (
+                      this.setState({
+                        filterText: ['cardTrunfo', event.target.checked],
+                        filterDisable: event.target.checked,
+                      }))
+                  }
+                />
+              </label>
+            </div>
+            <div className="deck-section-cards">
+              {this.cardConstructor(filterText)}
+            </div>
           </section>
         </main>
       </>

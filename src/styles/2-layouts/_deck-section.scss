@@ -1,0 +1,81 @@
+@import '../1-base/variables';
+
+.deck-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  &-filter {
+    padding: 1.5rem 0;
+    display: flex;
+    column-gap: 0.5rem;
+    justify-content: center;
+    align-items: center;
+
+    select {
+      padding: 0.2rem;
+      font-size: 1.5rem;
+      border: 0.15rem solid $dark-font;
+
+      option {
+        font-size: 1.5rem;
+      }
+    }
+
+    label {
+
+      input[type="text"] {
+        padding: 0.25rem 1rem;
+        font-size: 1.5rem;
+        border-radius: 5rem;
+        border: 0.15rem solid $dark-font;
+      }
+      
+
+    }
+  
+    &-trunfo {
+      display: flex;
+      align-items: center;
+      column-gap: 0.25rem;
+      
+      p {
+        font-size: 1.5rem;
+      }
+
+      input[type="checkbox"] {
+        width: 1.5rem;
+        height: 1.5rem;
+        border: 0.15rem solid $dark-font;
+      }
+    }
+  }
+
+  &-cards {
+    padding: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    column-gap: 1rem;
+    min-height: 45rem;
+
+    >div {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      row-gap: 0.25rem;
+      padding: 1rem 0;
+
+      button {
+        color: $light-font;
+        font-size: 1.5rem;
+        height: 2.5rem;
+        width: 70%;
+        background-color: $dark-font;
+        border: 0.1rem solid $light-font;
+        border-radius: 5rem;
+      }
+    }
+  }
+}
