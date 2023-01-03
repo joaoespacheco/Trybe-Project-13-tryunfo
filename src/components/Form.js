@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+const MAX_ATTRIBUTES_POINTS = 210;
+
 class Form extends React.Component {
   render() {
     const {
@@ -18,8 +20,8 @@ class Form extends React.Component {
       onSaveButtonClick,
     } = this.props;
     return (
-      <div>
-        <label htmlFor="name-input">
+      <div className="form-container">
+        <label htmlFor="name-input" className="form-container-name">
           <p>Nome da carta:</p>
           <input
             name="cardName"
@@ -38,37 +40,48 @@ class Form extends React.Component {
             onChange={ onInputChange }
           />
         </label>
-        <label htmlFor="attr1-input">
-          <p>Atributo 01:</p>
-          <input
-            name="cardAttr1"
-            data-testid="attr1-input"
-            type="number"
-            value={ cardAttr1 }
-            onChange={ onInputChange }
-          />
-        </label>
-        <label htmlFor="attr2-input">
-          <p>Atributo 02:</p>
-          <input
-            name="cardAttr2"
-            data-testid="attr2-input"
-            type="number"
-            value={ cardAttr2 }
-            onChange={ onInputChange }
-          />
-        </label>
-        <label htmlFor="attr3-input">
-          <p>Atributo 03:</p>
-          <input
-            name="cardAttr3"
-            data-testid="attr3-input"
-            type="number"
-            value={ cardAttr3 }
-            onChange={ onInputChange }
-          />
-        </label>
-        <label htmlFor="image-input">
+        <div className="form-container-attributes">
+          <label htmlFor="attr1-input">
+            <p>Atributo 01:</p>
+            <input
+              name="cardAttr1"
+              data-testid="attr1-input"
+              type="number"
+              value={ cardAttr1 }
+              onChange={ onInputChange }
+            />
+          </label>
+          <label htmlFor="attr2-input">
+            <p>Atributo 02:</p>
+            <input
+              name="cardAttr2"
+              data-testid="attr2-input"
+              type="number"
+              value={ cardAttr2 }
+              onChange={ onInputChange }
+            />
+          </label>
+          <label htmlFor="attr3-input">
+            <p>Atributo 03:</p>
+            <input
+              name="cardAttr3"
+              data-testid="attr3-input"
+              type="number"
+              value={ cardAttr3 }
+              onChange={ onInputChange }
+            />
+          </label>
+        </div>
+        <p>
+          Pontos de atributo restantes:
+          {' '}
+          {
+            MAX_ATTRIBUTES_POINTS - (
+              Number(cardAttr1) + Number(cardAttr2) + Number(cardAttr3)
+            )
+          }
+        </p>
+        <label htmlFor="image-input" className="form-container-image">
           <p>Imagem da carta:</p>
           <input
             name="cardImage"
@@ -78,7 +91,7 @@ class Form extends React.Component {
             onChange={ onInputChange }
           />
         </label>
-        <label htmlFor="rare-input">
+        <label htmlFor="rare-input" className="form-container-rarity">
           <p>Raridade:</p>
           <select
             name="cardRare"
@@ -91,9 +104,8 @@ class Form extends React.Component {
             <option>muito raro</option>
           </select>
         </label>
-        <br />
         {hasTrunfo === false ? (
-          <label htmlFor="trunfo-input">
+          <label htmlFor="trunfo-input" className="form-container-trunfo">
             <input
               name="cardTrunfo"
               data-testid="trunfo-input"
@@ -101,12 +113,17 @@ class Form extends React.Component {
               checked={ cardTrunfo }
               onChange={ onInputChange }
             />
-            <span>Super Trunfo</span>
+            <p>Super Trunfo</p>
           </label>
         ) : (
-          <h3>Você já tem um Super Trunfo em seu baralho</h3>
+          <p>
+            Você já tem um
+            {' '}
+            <span>Super Trunfo</span>
+            {' '}
+            em seu baralho
+          </p>
         )}
-        <br />
         <button
           data-testid="save-button"
           type="submit"

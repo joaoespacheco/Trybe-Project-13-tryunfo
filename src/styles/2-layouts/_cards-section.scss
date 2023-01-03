@@ -1,0 +1,16 @@
+@import '../1-base/variables';
+
+.cards-section {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 1.5rem 0;
+  border-bottom: 0.5rem solid $dark-font;
+
+  >div {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+  }
+}

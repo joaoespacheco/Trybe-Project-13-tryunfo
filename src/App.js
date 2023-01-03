@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-max-depth */
 import React from 'react';
 import Form from './components/Form';
 import Card from './components/Card';
@@ -11,6 +12,7 @@ const InitialState = {
   cardImage: '',
   cardRare: 'normal',
   cardTrunfo: false,
+  isSaveButtonDisabled: true,
 };
 
 class App extends React.Component {
@@ -150,67 +152,83 @@ class App extends React.Component {
   }
 
   render() {
-    const { filterText, filterDisable } = this.state;
-
+    const { filterText, filterDisable, isSaveButtonDisabled } = this.state;
+    console.log(isSaveButtonDisabled);
     return (
-      <div>
-        <h1>Tryunfo</h1>
-        <Form
-          { ...this.state }
-          onInputChange={ this.handleChanger }
-          onSaveButtonClick={ this.saveCardOnDeck }
-        />
-        <Card
-          { ...this.state }
-        />
-        <section>
-          <h2>Todas as cartas</h2>
-          <label htmlFor="name-filter">
-            <input
-              name="filterText"
-              type="text"
-              data-testid="name-filter"
-              onChange={
-                (event) => (
-                  this.setState({ filterText: ['cardName', event.target.value] }))
-              }
-              disabled={ filterDisable }
-            />
-          </label>
-          <label htmlFor="name-filter">
-            <select
-              name="filterRarity"
-              type="text"
-              data-testid="rare-filter"
-              onChange={
-                (event) => (
-                  this.setState({ filterText: ['cardRare', event.target.value] }))
-              }
-              disabled={ filterDisable }
-            >
-              <option>todas</option>
-              <option>normal</option>
-              <option>raro</option>
-              <option>muito raro</option>
-            </select>
-          </label>
-          <label htmlFor="trunfo-input">
-            Super trunfo
-            <input
-              data-testid="trunfo-filter"
-              type="checkbox"
-              onChange={
-                (event) => (
-                  this.setState({
-                    filterText: ['cardTrunfo', event.target.checked],
-                    filterDisable: event.target.checked,
-                  }))
-              }
-            />
-          </label>
-          {this.cardConstructor(filterText)}
-        </section>
-      </div>
+      <>
+        <header>
+          <h1>Tryunfo</h1>
+        </header>
+        <main>
+          <h1>Área de Criação</h1>
+          <section className="cards-section">
+            <div>
+              <Form
+                { ...this.state }
+                onInputChange={ this.handleChanger }
+                onSaveButtonClick={ this.saveCardOnDeck }
+              />
+            </div>
+            <div>
+              <Card
+                { ...this.state }
+              />
+            </div>
+          </section>
+          <h1>Minhas Cartas</h1>
+          <section className="deck-section">
+            <div className="deck-section-filter">
+              <label htmlFor="name-filter">
+                <input
+                  name="filterText"
+                  type="text"
+                  data-testid="name-filter"
+                  placeholder="Digite o nome da carta"
+                  onChange={
+                    (event) => (
+                      this.setState({ filterText: ['cardName', event.target.value] }))
+                  }
+                  disabled={ filterDisable }
+                />
+              </label>
+              <label htmlFor="name-filter">
+                <select
+                  name="filterRarity"
+                  type="text"
+                  data-testid="rare-filter"
+                  onChange={
+                    (event) => (
+                      this.setState({ filterText: ['cardRare', event.target.value] }))
+                  }
+                  disabled={ filterDisable }
+                >
+                  <option>todas</option>
+                  <option>normal</option>
+                  <option>raro</option>
+                  <option>muito raro</option>
+                </select>
+              </label>
+              <label htmlFor="trunfo-input" className="deck-section-filter-trunfo">
+                <p>Super trunfo</p>
+                <input
+                  data-testid="trunfo-filter"
+                  type="checkbox"
+                  onChange={
+                    (event) => (
+                      this.setState({
+                        filterText: ['cardTrunfo', event.target.checked],
+                        filterDisable: event.target.checked,
+                      }))
+                  }
+                />
+              </label>
+            </div>
+            <div className="deck-section-cards">
+              {this.cardConstructor(filterText)}
+            </div>
+          </section>
+        </main>
+      </>
     );
   }
 }

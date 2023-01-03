@@ -1,0 +1,118 @@
+@import '../1-base/variables';
+
+.form-container {
+  background-color: $second-color;
+  border-radius: 1rem;
+  border: 0.3rem solid $second-color;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 1rem 0.5rem 1rem;
+  row-gap: 1rem;
+  width: 26rem;
+  height: 38rem;
+  transition: 1s;
+
+  label {
+    padding: 0.1rem;
+
+    p {
+      color: $light-font;
+      font-size: 1.5rem;
+    }
+
+    input {
+      border: .15rem solid black;
+      font-size: 1.5rem;
+      height: 2rem;
+    }
+
+    textarea {
+      font-size: 1.5rem;
+      border: .15rem solid black;
+      height: 4rem;
+      width: 100%;
+      padding-right: 1rem;
+    }
+  }
+
+  &-image, &-name {
+    input {
+      width: 100%;
+    }
+  }
+
+  &-attributes{
+    display: flex;
+    column-gap: 0.3rem;
+    width: 100%;
+
+    p {
+      text-align: center;
+    }
+
+    input {
+      width: 100%;
+    }
+  }
+
+  &-rarity{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 2rem;
+
+    select {
+      width: 40%;
+      font-size: 1.5rem;
+      border: .15rem solid black;
+      border-radius: 0.5rem;
+      padding: 0.15rem;
+
+      option {
+        font-size: 1.5rem;
+        text-align: left;
+      }
+    }
+  }
+
+  &-trunfo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 0.7rem;
+
+    input {
+      width: 1.5rem;
+    }
+  }
+
+  >p {
+    text-align: center;
+    color: $light-font;
+    font-size: 1.3rem;
+
+    span {
+      font-weight: 900;
+    }
+  }
+
+  button {
+    color: $light-font;
+    background-color: black;
+    height: 3rem;
+    font-size: 1.5rem;
+    border-radius: 0.5rem;
+    transition: 1s;
+    border: none;
+  }
+
+  button:disabled {
+    background-color: rgba(0,0,0, 0.6);
+    color: rgba(0,0,0, 0.6);
+  }
+
+  &:hover {
+    border: 0.3rem solid $dark-font;
+  }
+
+}

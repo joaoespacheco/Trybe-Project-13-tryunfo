@@ -1,0 +1,15 @@
+@import '../1-base/variables';
+
+header {
+  background-color: $second-color;
+  color: $light-font;
+  border-bottom: 0.5rem solid $dark-font;
+  
+  h1 {
+    text-align: left;
+    font-size: 5rem;
+    font-weight: bold;
+    padding: 1rem;
+    text-shadow: 0.25rem 0.15rem $dark-font;
+  }
+}
