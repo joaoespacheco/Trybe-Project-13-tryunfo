@@ -52,7 +52,8 @@ Aprovado com 100% de desempenho em todos os requisitos
 
 <details>
 <summary><strong>Visualizar projeto</strong></summary>
-<strong>Tela principal:</strong>
+        
+### Tela principal:
 
 ![Tryunfo-layout](https://user-images.githubusercontent.com/99846604/211169712-39ef2987-65af-403c-8dd8-69035a698e36.gif)
 
