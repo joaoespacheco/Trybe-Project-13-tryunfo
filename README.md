@@ -16,7 +16,6 @@ Dentro da aplicação o usuário poderá:
 Apesar dos requisitos obrigatórios e bônus do projeto estarem cumpridos há espaço para melhorias dentro da aplicação e por isso a fase de desenvolvimento ainda está em progresso.
 </br>
 Tarefas em andamento:
-> * Estilização da aplicação
 > * Testes automatizados
 > * Funcionalidade de jogar
 
@@ -24,6 +23,9 @@ Tarefas em andamento:
 <details>
 <summary><strong>Desempenho</strong></summary>
 Aprovado com 100% de desempenho em todos os requisitos
+
+![image](https://user-images.githubusercontent.com/99846604/211169460-41f5e89b-f874-42a5-bfbe-28d514feab79.png)
+
 </details>
 
 <details>
@@ -50,7 +52,9 @@ Aprovado com 100% de desempenho em todos os requisitos
 
 <details>
 <summary><strong>Visualizar projeto</strong></summary>
-:construction: Área em construção ! :construction:
+
+![Tryunfo-layout](https://user-images.githubusercontent.com/99846604/211169712-39ef2987-65af-403c-8dd8-69035a698e36.gif)
+
 </details>
 </br>
 
@@ -65,6 +69,7 @@ Aprovado com 100% de desempenho em todos os requisitos
 ## 🧰 Ferramentas:
 * HTML
 * CSS
+  * SASS
 * JavaScript
 * React
 </br>
