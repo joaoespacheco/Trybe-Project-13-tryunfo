@@ -51,13 +51,18 @@ Aprovado com 100% de desempenho em todos os requisitos
 </details>
 
 <details>
-<summary><strong>Visualizar projeto</strong></summary>
+<summary><strong>Imagens do projeto</strong></summary>
         
 ### Tela principal:
 
 ![Tryunfo-layout](https://user-images.githubusercontent.com/99846604/211169712-39ef2987-65af-403c-8dd8-69035a698e36.gif)
 
 </details>
+
+</br>
+
+### [👨‍💻 Clique aqui para acessar o projeto em seu navegador](https://tryunfo-joaoespacheco.vercel.app/) 
+
 </br>
 
 ## ⚙️ Execução
@@ -66,7 +71,7 @@ Faça o clone deste repositório com o seguinte comando:
 
         git clone git@github.com:joaoespacheco/Trybe-Project-13-tryunfo.git
 
-Para exercutar o projeto utilize o comando abaixo para instalar as dependências:
+Dentro da pasta raiz do projeto, instale as dependências com o seguinte comando:
 
         npm install
 
